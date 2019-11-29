@@ -1,0 +1,29 @@
+host:
+  public: 0.0.0.0
+  private: 192.168.1.158
+  local: 127.0.0.1
+
+spring:
+  application:
+    name: Merchant
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${host.local}:3306/merchant?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+  kafka:
+    bootstrap-servers: ${host.local}:9092
+    consumer:
+      group-id: merchant
+    listener:
+      concurrency: 4    # 监听线程数
+
+server:
+  port: 8080
+
+logging:
+  path: /usr/local/apps/merchant/log
+  file: ${logging.path}/merchant
+  config: classpath:logback-spring.xml
+  level:
+    com.glw.platform: debug
