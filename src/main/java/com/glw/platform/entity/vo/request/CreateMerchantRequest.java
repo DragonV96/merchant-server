@@ -79,6 +79,7 @@ public class CreateMerchantRequest {
         merchant.setBusinessLicenseUrl(businessLicenseUrl);
         merchant.setPhone(phone);
         merchant.setAddress(address);
+        merchant.setIsAudit(false);
 
         return merchant;
     }
