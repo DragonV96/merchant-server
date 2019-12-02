@@ -18,9 +18,6 @@ spring:
     listener:
       concurrency: 4    # 监听线程数
 
-server:
-  port: 8080
-
 logging:
   path: F:/IDEA Project/merchant-server
   file: ${logging.path}/merchant

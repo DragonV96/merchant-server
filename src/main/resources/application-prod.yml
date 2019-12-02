@@ -18,9 +18,6 @@ spring:
     listener:
       concurrency: 4    # 监听线程数
 
-server:
-  port: 8080
-
 logging:
   path: /usr/local/apps/merchant/log
   file: ${logging.path}/merchant
