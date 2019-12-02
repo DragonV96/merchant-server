@@ -3,6 +3,8 @@ package com.glw.platform.entity.vo.request;
 import com.glw.platform.dao.MerchantDao;
 import com.glw.platform.entity.Merchant;
 import com.glw.platform.enums.ErrorCodeEnums;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,31 +18,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(value = "创建商户请求对象")
 public class CreateMerchantRequest {
 
-    /**
-     * 商户名称
-     */
+    @ApiModelProperty(value = "商户名称")
     private String name;
 
-    /**
-     * 商户 logo
-     */
+    @ApiModelProperty(value = "商户 logo")
     private String logoUrl;
 
-    /**
-     * 商户营业执照
-     */
+    @ApiModelProperty(value = "商户营业执照")
     private String businessLicenseUrl;
 
-    /**
-     * 商户联系电话
-     */
+    @ApiModelProperty(value = "商户联系电话")
     private String phone;
 
-    /**
-     * 商户地址
-     */
+    @ApiModelProperty(value = "商户地址")
     private String address;
 
     /**
