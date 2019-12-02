@@ -1,6 +1,9 @@
 package com.glw.platform.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.glw.platform.constant.Constants;
 import com.glw.platform.dao.MerchantDao;
+import com.glw.platform.entity.Merchant;
 import com.glw.platform.entity.vo.CoupouTemplate;
 import com.glw.platform.entity.vo.request.CreateMerchantRequest;
 import com.glw.platform.entity.vo.response.CreateMerchantResponse;
@@ -9,9 +12,11 @@ import com.glw.platform.enums.ErrorCodeEnums;
 import com.glw.platform.service.IMerchantService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 /**
  * @author : glw
@@ -25,6 +30,9 @@ public class MerchantServiceImpl implements IMerchantService {
 
     @Autowired
     private MerchantDao merchantDao;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
     @Transactional
@@ -47,11 +55,33 @@ public class MerchantServiceImpl implements IMerchantService {
 
     @Override
     public Response buildMerchantInfoById(Integer id) {
-        return null;
+        Response response = new Response();
+
+        Optional<Merchant> optional = merchantDao.findById(id);
+        Merchant merchant = optional.get();
+        if (null == merchant) {
+            response.setErrorCode(ErrorCodeEnums.MERCHANT_NOT_EXIST.getCode());
+            response.setMsg(ErrorCodeEnums.MERCHANT_NOT_EXIST.getDesc());
+        }
+        response.setData(merchant);
+
+        return response;
     }
 
     @Override
     public Response dropCoupouTemplate(CoupouTemplate template) {
-        return null;
+        Response response = new Response();
+        ErrorCodeEnums errorCode = template.validate(merchantDao);
+
+        if (errorCode != ErrorCodeEnums.SUCCESS) {
+            response.setErrorCode(errorCode.getCode());
+            response.setMsg(errorCode.getDesc());
+        } else {
+            String coupouTemplate = JSON.toJSONString(template);
+            kafkaTemplate.send(Constants.TEMPLATE_TOPIC, Constants.TEMPLATE_TOPIC, coupouTemplate);
+            log.info("MerchantServiceImpl dropCoupouTemplate：{}", coupouTemplate);
+        }
+
+        return response;
     }
 }
