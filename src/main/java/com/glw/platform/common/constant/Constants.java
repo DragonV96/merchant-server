@@ -1,4 +1,4 @@
-package com.glw.platform.constant;
+package com.glw.platform.common.constant;
 
 /**
  * @author : glw

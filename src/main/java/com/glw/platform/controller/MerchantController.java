@@ -35,7 +35,7 @@ public class MerchantController {
     }
 
     @ApiOperation(value = "构造商户信息", notes = "根据 id 构造商户信息")
-    @PostMapping("/build")
+    @PostMapping("/{id}")
     @ResponseBody
     public Response buildMerchantInfoById(@PathVariable Integer id) {
         log.info("MerchantController buildMerchantInfoById：{}", id);

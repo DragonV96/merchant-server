@@ -1,7 +1,7 @@
 package com.glw.platform.entity.vo;
 
 import com.glw.platform.dao.MerchantDao;
-import com.glw.platform.enums.ErrorCodeEnums;
+import com.glw.platform.common.enums.ErrorCodeEnums;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -33,20 +33,20 @@ public class CoupouTemplate {
     private String desc;
 
     @ApiModelProperty(value = "优惠券最大个数限制")
-    private String limit;
+    private Integer limit;
 
     // token 存到redis Set中，每次领取从redis中获取
     @ApiModelProperty(value = "优惠券的是否有 token")
-    private String hasToken;
+    private Boolean hasToken;
 
     @ApiModelProperty(value = "优惠券的背景色")
-    private String backgroud;
+    private Integer backgroud;
 
     @ApiModelProperty(value = "优惠券的开始时间")
-    private String start;
+    private Long start;
 
     @ApiModelProperty(value = "优惠券的结束时间")
-    private String end;
+    private Long end;
 
     /**
      * 校验优惠券对象的有效性

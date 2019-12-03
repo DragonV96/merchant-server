@@ -1,14 +1,14 @@
 package com.glw.platform.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.glw.platform.constant.Constants;
+import com.glw.platform.common.constant.Constants;
 import com.glw.platform.dao.MerchantDao;
 import com.glw.platform.entity.Merchant;
 import com.glw.platform.entity.vo.CoupouTemplate;
 import com.glw.platform.entity.vo.request.CreateMerchantRequest;
 import com.glw.platform.entity.vo.response.CreateMerchantResponse;
 import com.glw.platform.entity.vo.response.Response;
-import com.glw.platform.enums.ErrorCodeEnums;
+import com.glw.platform.common.enums.ErrorCodeEnums;
 import com.glw.platform.service.IMerchantService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +77,7 @@ public class MerchantServiceImpl implements IMerchantService {
             response.setErrorCode(errorCode.getCode());
             response.setMsg(errorCode.getDesc());
         } else {
+            response.setData(template);
             String coupouTemplate = JSON.toJSONString(template);
             kafkaTemplate.send(Constants.TEMPLATE_TOPIC, Constants.TEMPLATE_TOPIC, coupouTemplate);
             log.info("MerchantServiceImpl dropCoupouTemplate：{}", coupouTemplate);

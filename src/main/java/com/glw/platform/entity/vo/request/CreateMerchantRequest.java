@@ -2,7 +2,7 @@ package com.glw.platform.entity.vo.request;
 
 import com.glw.platform.dao.MerchantDao;
 import com.glw.platform.entity.Merchant;
-import com.glw.platform.enums.ErrorCodeEnums;
+import com.glw.platform.common.enums.ErrorCodeEnums;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

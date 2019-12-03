@@ -1,4 +1,4 @@
-package com.glw.platform.security;
+package com.glw.platform.common.security;
 
 /**
  * @author : glw

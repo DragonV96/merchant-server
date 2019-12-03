@@ -1,6 +1,6 @@
-package com.glw.platform.security;
+package com.glw.platform.common.security;
 
-import com.glw.platform.constant.Constants;
+import com.glw.platform.common.constant.Constants;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -37,7 +37,7 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
         }
         AccessContext.setToken(token);
 
-        return false;
+        return true;
     }
 
     /**

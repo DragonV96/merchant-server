@@ -1,4 +1,4 @@
-package com.glw.platform.enums;
+package com.glw.platform.common.enums;
 
 import lombok.Getter;
 
